@@ -13,6 +13,7 @@ flask-restx = "*"
 flask-jwt-extended = "*"
 bcrypt = "*"
 marshmallow-sqlalchemy = "*"
+flask-session = "*"
 
 [dev-packages]
 
