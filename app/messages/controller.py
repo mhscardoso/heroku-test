@@ -1,7 +1,6 @@
 from flask import jsonify, request
 from flask.views import MethodView
 from flask_jwt_extended import jwt_required
-from app.utils.filter import filters
 from app.messages.model import Message
 from app.messages.schemas import MessageSchema
 
@@ -18,8 +17,9 @@ class MessageCreateAndList(MethodView):
     
 
     def get(self):
-        schema = MessageSchema()
+        schema = MessageSchema(many=True)
         messages = Message.query.all()
-        return jsonify(schema.dump(messages)), 200
+
+        return schema.dump(messages), 200
 
 

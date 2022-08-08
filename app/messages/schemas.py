@@ -10,3 +10,5 @@ class MessageSchema(ma.SQLAlchemySchema):
     id = ma.Integer(dump_only=True)
     title = ma.String(required=True)
     text = ma.String(required=True)
+
+    user_id = ma.Integer(required=True)
