@@ -14,6 +14,7 @@ flask-jwt-extended = "*"
 bcrypt = "*"
 marshmallow-sqlalchemy = "*"
 flask-session = "*"
+gunicorn = "*"
 
 [dev-packages]
 
