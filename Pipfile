@@ -15,6 +15,7 @@ bcrypt = "*"
 marshmallow-sqlalchemy = "*"
 flask-session = "*"
 gunicorn = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 

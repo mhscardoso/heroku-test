@@ -5,6 +5,6 @@ load_dotenv()
 
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = "sqlite:///data.sqlite"
+    SQLALCHEMY_DATABASE_URI = getenv('SQLALCHEMY_DATABASE_URI')
 
     JWT_SECRET_KEY = getenv('JWT_SECRET_KEY')
