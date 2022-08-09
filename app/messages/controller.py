@@ -1,21 +1,29 @@
-from flask import jsonify, request
-from flask.views import MethodView
+from flask import request
 from flask_jwt_extended import jwt_required
+from flask_restx import Namespace, Resource, fields
 from app.messages.model import Message
 from app.messages.schemas import MessageSchema
 
+api = Namespace('messages', description='Messages Management')
 
-class MessageCreateAndList(MethodView):
-    decorators = [jwt_required()]
+messages_fields = api.model(
+    "Message", { 'title': fields.String, 
+                 'text': fields.String,
+                 'user_id': fields.Integer }
+)
+
+class MessageList(Resource):
+    @jwt_required
+    @api.doc(body=messages_fields)
     def post(self):
         data = request.json
         schema = MessageSchema()
         message = schema.load(data)
         message.save()
 
-        return jsonify(schema.dump(message)), 200
+        return schema.dump(message), 200
     
-
+    @jwt_required
     def get(self):
         schema = MessageSchema(many=True)
         messages = Message.query.all()
@@ -23,3 +31,4 @@ class MessageCreateAndList(MethodView):
         return schema.dump(messages), 200
 
 
+api.add_resource(MessageList, '')

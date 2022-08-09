@@ -1,8 +1,8 @@
 from flask import Flask
 from app.config import Config
 from app.extensions import db, ma, migrate, jwt
-from app.user.routes import user_api
-from app.messages.routes import message_api
+
+from app.api import api_bp
 
 def create_app():
     app = Flask(__name__)
@@ -13,7 +13,6 @@ def create_app():
     ma.init_app(app)
     jwt.init_app(app)
 
-    app.register_blueprint(user_api)
-    app.register_blueprint(message_api)
+    app.register_blueprint(api_bp, url_prefix='/')
 
     return app

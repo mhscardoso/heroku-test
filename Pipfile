@@ -16,6 +16,8 @@ marshmallow-sqlalchemy = "*"
 flask-session = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+flask-restplus = "*"
+werkzeug = "==2.1.2"
 
 [dev-packages]
 
