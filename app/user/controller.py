@@ -13,6 +13,12 @@ user_fields = api.model(
               'password': fields.String }
 )
 
+user_fields_update = api.model(
+    "UserP", {
+        'username': fields.String
+    }
+)
+
 class UserList(Resource):
     def get(self):
         schema = filters.getSchema(qs=request.args, schema_cls=UserSchema, many=True)
@@ -36,7 +42,7 @@ class UserId(Resource):
         user = User.query.get_or_404(id)
         return schema.dump(user), 200
 
-    @api.doc(body=user_fields, security='apikey')
+    @api.doc(body=user_fields_update, security='apikey')
     def put(self, id):
         try:
             user = User.query.get_or_404(id)
@@ -50,7 +56,7 @@ class UserId(Resource):
         user.update()
         return schema.dump(user), 200
     
-    @api.doc(body=user_fields, security='apikey')
+    @api.doc(body=user_fields_update, security='apikey')
     def patch(self, id):
         try:
             user = User.query.get_or_404(id)
