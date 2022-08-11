@@ -10,11 +10,12 @@ authorizations = {
     'apikey' : {
         'type': 'apiKey',
         'in': 'header',
-        'name': 'X-API-KEY'
+        'name': 'Authorization',
+        'description': "Type in the *'Value'* input box below: **'Bearer &lt;JWT&gt;'**, where JWT is the token"
     }
 }
 
-api = Api(api_bp, title='Heroku Test', description='Rest API - Heroku Test', authorizations=authorizations)
+api = Api(api_bp, title='Heroku Test', description='Rest API - Heroku Test', authorizations=authorizations, security='apikey')
 
 # Add everything!!!
 api.add_namespace(user_ns)

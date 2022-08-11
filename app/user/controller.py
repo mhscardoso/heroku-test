@@ -29,14 +29,14 @@ class UserList(Resource):
 
 
 class UserId(Resource):
-    @api.doc(security='apiKey')
-    @jwt_required
+    decorators = [jwt_required()]
+    @api.doc(security='apikey')
     def get(self, id):
         schema = filters.getSchema(qs=request.args, schema_cls=UserSchema)
         user = User.query.get_or_404(id)
         return schema.dump(user), 200
 
-    @api.doc(body=user_fields, security='apiKey')
+    @api.doc(body=user_fields, security='apikey')
     def put(self, id):
         try:
             user = User.query.get_or_404(id)
@@ -50,7 +50,7 @@ class UserId(Resource):
         user.update()
         return schema.dump(user), 200
     
-    @api.doc(body=user_fields, security='apiKey')
+    @api.doc(body=user_fields, security='apikey')
     def patch(self, id):
         try:
             user = User.query.get_or_404(id)
@@ -64,7 +64,7 @@ class UserId(Resource):
         user.update()
         return schema.dump(user), 200
 
-    @api.doc(security='apiKey')
+    @api.doc(security='apikey')
     def delete(self, id):
         try:
             user = User.query.get_or_404(id)
