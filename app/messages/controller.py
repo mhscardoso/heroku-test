@@ -1,5 +1,4 @@
 from flask import request
-from flask_jwt_extended import jwt_required
 from flask_restx import Namespace, Resource, fields
 from app.messages.model import Message
 from app.messages.schemas import MessageSchema
@@ -13,7 +12,6 @@ messages_fields = api.model(
 )
 
 class MessageList(Resource):
-    @jwt_required
     @api.doc(body=messages_fields)
     def post(self):
         data = request.json
@@ -23,7 +21,6 @@ class MessageList(Resource):
 
         return schema.dump(message), 200
     
-    @jwt_required
     def get(self):
         schema = MessageSchema(many=True)
         messages = Message.query.all()
